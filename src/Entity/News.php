@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="App\Repository\NewsRepository")
  * @ORM\Table(name="np_news")
  * @UniqueEntity(fields={"title"}, message="There is already an news with this title and overview")
  */
