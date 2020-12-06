@@ -4,12 +4,46 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table(name="np_news")
+ * @UniqueEntity(fields={"title,overview"}, message="There is already an news with this title and overview")
+ */
 class News
 {
+    /**
+     * @var null|int
+     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
     private ?int $id = null;
+
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=false)
+     */
     private string $title = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=false)
+     */
     private string $overview = '';
+
+    /**
+     * @var string
+     * @ORM\Column(type="text", nullable=false)
+     */
     private string $content = '';
+
+    /**
+     * @var null|string
+     * @ORM\Column(type="text", nullable=true)
+     */
     private ?string $imageUrl = null;
 
     public function getId(): ?int
