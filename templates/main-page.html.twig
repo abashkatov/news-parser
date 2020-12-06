@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block h2 %}Новости{% endblock %}
+{% block body %}
+<div class="py-5 bg-light">
+    <div class="container">
+        {% for news in newsArray %}
+            <div class="row featurette">
+                {% if news.imageUrl %}
+                    <div class="col-md-7 order-md-2">
+                        <h2 class="featurette-heading">{{ news.title }}</h2>
+                        <p class="lead">{{ news.content|striptags|slice(0, 200) }}...</p>
+                    </div>
+                    <div class="col-md-5 order-md-1">
+                        <img src="{{ news.imageUrl }}" alt="{{ news.title }}" width="500" height="500"
+                                 class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                        >
+                        <a href="{{ path('app_newsparser_newspage', {news: news.id}) }}">Полная новость</a>
+                    </div>
+                {% else %}
+                    <div class="col-md-12 order-md-2">
+                        <h2 class="featurette-heading">{{ news.title }}</h2>
+                        <p class="lead">{{ news.content|striptags|slice(0, 200) }}...</p>
+                        <a href="{{ path('app_newsparser_newspage', {news: news.id}) }}">Полная новость</a>
+                    </div>
+                {% endif %}
+            </div>
+            <hr class="featurette-divider">
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

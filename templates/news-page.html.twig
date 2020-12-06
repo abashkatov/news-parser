@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block h2 %}{{ news.title }}{% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card mb-12 shadow-sm">
+                    {% if news.imageUrl %}
+                        <img src="{{ news.imageUrl }}" alt="{{ news.title }}"
+                             class="card-img-top bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
+                        >
+                    {% endif %}
+                    <div class="card-body">
+                        {% if news.overview %}
+                            <p>{{ news.overview }}</p>
+                        {% endif %}
+
+                        {{ news.content|raw }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>{% endblock %}
