@@ -29,10 +29,10 @@ class News
     private string $title = '';
 
     /**
-     * @var string
-     * @ORM\Column(type="text", nullable=false)
+     * @var null|string
+     * @ORM\Column(type="text", nullable=true)
      */
-    private string $overview = '';
+    private ?string $overview = null;
 
     /**
      * @var string
@@ -63,12 +63,12 @@ class News
         return $this;
     }
 
-    public function getOverview(): string
+    public function getOverview(): ?string
     {
         return $this->overview;
     }
 
-    public function setOverview(string $overview): News
+    public function setOverview(?string $overview): News
     {
         $this->overview = $overview;
 
