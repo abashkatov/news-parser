@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Model\Parser\ContentParser;
 
+use App\Model\Parser\Client\FileClient;
 use App\Model\Parser\ContentParser\SelectorParser;
 use App\Model\Parser\Dto\LinkDto;
 use App\Model\Parser\Dto\SelectorDto;
@@ -13,7 +14,8 @@ final class SelectorParserTest extends TestCase
 {
     public function testParseLink(): void
     {
-        $parser = new SelectorParser();
+        $client = new FileClient();
+        $parser = new SelectorParser($client);
         $link = new LinkDto(
             '',
             __DIR__ . '/../../../data/sites/news.rbc.ru.html'

@@ -5,17 +5,23 @@ declare(strict_types=1);
 namespace App\Model\Parser\ContentParser;
 
 use App\Entity\News;
+use App\Model\Parser\Client\ParserClientInterface;
 use App\Model\Parser\Dto\LinkDto;
 use App\Model\Parser\Dto\SelectorDto;
-use Symfony\Component\DomCrawler\Crawler;
 
 final class SelectorParser
 {
+    private ParserClientInterface $client;
+
+    public function __construct(ParserClientInterface $client)
+    {
+        $this->client = $client;
+    }
+
     public function parseLink(LinkDto $link, SelectorDto $selector): News
     {
         $news = new News();
-        $content = \file_get_contents($link->getUrl());
-        $crawler = new Crawler($content);
+        $crawler = $this->client->getCrawler($link->getUrl());
 
         $news->setTitle(
             $crawler->filter($selector->getTitle())->text()

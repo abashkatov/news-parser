@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Model\Parser;
 
+use App\Model\Parser\Client\FileClient;
 use App\Model\Parser\Dto\SelectorDto;
 use App\Model\Parser\LinkParser;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +13,8 @@ final class LinkParserTest extends TestCase
 {
     public function testParseLinks(): void
     {
-        $parser = new LinkParser();
+        $client = new FileClient();
+        $parser = new LinkParser($client);
         $selector = new SelectorDto(
             'a.news-feed__item.js-news-feed-item',
             '',

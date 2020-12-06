@@ -4,12 +4,19 @@ declare(strict_types=1);
 
 namespace App\Model\Parser;
 
+use App\Model\Parser\Client\ParserClientInterface;
 use App\Model\Parser\Dto\LinkDto;
 use App\Model\Parser\Dto\SelectorDto;
-use Symfony\Component\DomCrawler\Crawler;
 
 final class LinkParser
 {
+    private ParserClientInterface $client;
+
+    public function __construct(ParserClientInterface $client)
+    {
+        $this->client = $client;
+    }
+
     /**
      * @param string      $url
      * @param SelectorDto $selector
@@ -19,8 +26,8 @@ final class LinkParser
     public function parseLinks(string $url, SelectorDto $selector): array
     {
         $links = [];
-        $content = \file_get_contents($url);
-        $crawler = new Crawler($content);
+        $crawler = $this->client->getCrawler($url);
+
         foreach ($crawler->filter($selector->getLink())->getIterator() as $node) {
             $links[] = $this->mapToLinkDto($node);
         }
