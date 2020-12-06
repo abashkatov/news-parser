@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity()
  * @ORM\Table(name="np_news")
- * @UniqueEntity(fields={"title,overview"}, message="There is already an news with this title and overview")
+ * @UniqueEntity(fields={"title"}, message="There is already an news with this title and overview")
  */
 class News
 {
