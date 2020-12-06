@@ -27,9 +27,10 @@ final class SelectorParser
             $crawler->filter($selector->getTitle())->text()
         );
 
-        $news->setOverview(
-            $crawler->filter($selector->getOverview())->text()
-        );
+        $overviewElement = $crawler->filter($selector->getOverview());
+        if ($overviewElement->count() > 0) {
+            $news->setOverview($overviewElement->text());
+        }
 
         $content = '';
         foreach ($crawler->filter($selector->getContent()) as $node) {
