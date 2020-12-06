@@ -19,6 +19,7 @@ final class SelectorParserTest extends TestCase
             __DIR__ . '/../../../data/sites/news.rbc.ru.html'
         );
         $selector = new SelectorDto(
+            '',
             'h1',
             '.article__text__overview>span',
             '.article__text.article__text_free>p',

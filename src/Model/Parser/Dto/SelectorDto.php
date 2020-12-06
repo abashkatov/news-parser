@@ -14,8 +14,11 @@ final class SelectorDto
 
     private string $image;
 
-    public function __construct(string $title, string $overview, string $content, string $image)
+    private string $link;
+
+    public function __construct(string $link, string $title, string $overview, string $content, string $image)
     {
+        $this->link = $link;
         $this->title = $title;
         $this->overview = $overview;
         $this->content = $content;
@@ -40,5 +43,10 @@ final class SelectorDto
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    public function getLink(): string
+    {
+        return $this->link;
     }
 }
